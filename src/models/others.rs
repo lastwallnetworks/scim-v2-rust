@@ -77,7 +77,10 @@ pub struct ListResponse {
     pub total_results: i64,
     pub start_index: i64,
     pub schemas: Vec<String>,
-    #[serde(rename = "Resources")]
+    // Note: Having a serde default of an empty Vec is not technically to spec.
+    // It was just the easiest method to get this working. To be spec compliant
+    // it should be `Option<Vec<Resource>>`
+    #[serde(rename = "Resources", default)]
     pub resources: Vec<Resource>,
 }
 
