@@ -1,8 +1,10 @@
+use std::collections::HashMap;
 use std::convert::TryFrom;
 
 use serde::{Deserialize, Serialize};
 
 use crate::models::enterprise_user::EnterpriseUser;
+use crate::models::extra_attribute::ExtraAttributeValue;
 use crate::models::scim_schema::Meta;
 use crate::utils::error::SCIMError;
 
@@ -63,6 +65,10 @@ pub struct User {
         skip_serializing_if = "Option::is_none"
     )]
     pub enterprise_user: Option<EnterpriseUser>,
+
+    /// Extra, off-spec values that can be added to a SCIM user.
+    #[serde(flatten, skip_serializing_if = "Option::is_none")]
+    pub extra: Option<HashMap<String, ExtraAttributeValue>>,
 }
 
 impl Default for User {
@@ -94,6 +100,7 @@ impl Default for User {
             x509_certificates: None,
             meta: None,
             enterprise_user: None,
+            extra: None,
         }
     }
 }

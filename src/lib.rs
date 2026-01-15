@@ -86,6 +86,7 @@ const ENTERPRISE_USER_SCHEMA: &str = include_str!("schemas/enterprise_user.json"
 pub mod models {
     pub mod enterprise_user;
     pub mod errors;
+    pub mod extra_attribute;
     pub mod group;
     pub mod others;
     pub mod resource_types;
